@@ -78,7 +78,7 @@ void SCH_LAB_AppMain(void)
     CFE_Status_t          Status;
     uint32                RunStatus = CFE_ES_RunStatus_APP_RUN;
     SCH_LAB_StateEntry_t *LocalStateEntry;
-    CFE_SB_Buffer_t *     SBBufPtr;
+    CFE_SB_Buffer_t      *SBBufPtr;
 
     CFE_ES_PerfLogEntry(SCH_LAB_MAIN_TASK_PERF_ID);
 
@@ -157,10 +157,10 @@ CFE_Status_t SCH_LAB_AppInit(void)
     int32                         OsStatus;
     uint32                        TimerPeriod;
     osal_id_t                     TimeBaseId = OS_OBJECT_ID_UNDEFINED;
-    SCH_LAB_ScheduleTable_t *     ConfigTable;
+    SCH_LAB_ScheduleTable_t      *ConfigTable;
     SCH_LAB_ScheduleTableEntry_t *ConfigEntry;
-    SCH_LAB_StateEntry_t *        LocalStateEntry;
-    void *                        TableAddr;
+    SCH_LAB_StateEntry_t         *LocalStateEntry;
+    void                         *TableAddr;
     char                          VersionString[SCH_LAB_CFG_MAX_VERSION_STR_LEN];
 
     memset(&SCH_LAB_Global, 0, sizeof(SCH_LAB_Global));
@@ -191,8 +191,11 @@ CFE_Status_t SCH_LAB_AppInit(void)
     /*
     ** Register tables with cFE and load default data
     */
-    Status = CFE_TBL_Register(&SCH_LAB_Global.TblHandle, "Schedule", sizeof(SCH_LAB_ScheduleTable_t),
-                              CFE_TBL_OPT_DEFAULT, NULL);
+    Status = CFE_TBL_Register(&SCH_LAB_Global.TblHandle,
+                              "Schedule",
+                              sizeof(SCH_LAB_ScheduleTable_t),
+                              CFE_TBL_OPT_DEFAULT,
+                              NULL);
 
     if (Status != CFE_SUCCESS)
     {
@@ -240,7 +243,8 @@ CFE_Status_t SCH_LAB_AppInit(void)
         if (ConfigEntry->PacketRate != 0)
         {
             /* Initialize the message with the length of the header + payload */
-            CFE_MSG_Init(CFE_MSG_PTR(LocalStateEntry->CommandHeader), ConfigEntry->MessageID,
+            CFE_MSG_Init(CFE_MSG_PTR(LocalStateEntry->CommandHeader),
+                         ConfigEntry->MessageID,
                          sizeof(LocalStateEntry->CommandHeader) + ConfigEntry->PayloadLength);
             CFE_MSG_SetFcnCode(CFE_MSG_PTR(LocalStateEntry->CommandHeader), ConfigEntry->FcnCode);
 
@@ -267,7 +271,8 @@ CFE_Status_t SCH_LAB_AppInit(void)
         TimerPeriod = 1000000 / ConfigTable->TickRate;
         if ((TimerPeriod * ConfigTable->TickRate) != 1000000)
         {
-            CFE_ES_WriteToSysLog("%s: WARNING: tick rate of %lu is not an integer number of microseconds\n", __func__,
+            CFE_ES_WriteToSysLog("%s: WARNING: tick rate of %lu is not an integer number of microseconds\n",
+                                 __func__,
                                  (unsigned long)ConfigTable->TickRate);
         }
     }
@@ -301,8 +306,12 @@ CFE_Status_t SCH_LAB_AppInit(void)
         CFE_ES_WriteToSysLog("%s: OS_TimerSet failed:RC=%ld\n", __func__, (long)OsStatus);
     }
 
-    CFE_Config_GetVersionString(VersionString, SCH_LAB_CFG_MAX_VERSION_STR_LEN, "SCH Lab", SCH_LAB_VERSION,
-                                SCH_LAB_BUILD_CODENAME, SCH_LAB_LAST_OFFICIAL);
+    CFE_Config_GetVersionString(VersionString,
+                                SCH_LAB_CFG_MAX_VERSION_STR_LEN,
+                                "SCH Lab",
+                                SCH_LAB_VERSION,
+                                SCH_LAB_BUILD_CODENAME,
+                                SCH_LAB_LAST_OFFICIAL);
 
     OS_printf("SCH Lab Initialized.%s\n", VersionString);
 
