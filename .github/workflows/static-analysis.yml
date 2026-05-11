@@ -15,5 +15,5 @@ on:
 
 jobs:
   static-analysis:
-    name: Run cppcheck
-    uses: nasa/cFS/.github/workflows/static-analysis.yml@main
+    name: Static Analysis
+    uses: nasa/cFS/.github/workflows/app-static-analysis-reusable.yml@dev
