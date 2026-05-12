@@ -26,8 +26,8 @@
 
 /* Development Build Macro Definitions */
 #define SCH_LAB_BUILD_NUMBER    0        /*!< Development Build: Number of commits since baseline */
-#define SCH_LAB_BUILD_BASELINE  "v7.0.0" /*!< Development Build: git tag that is the base for current development */
-#define SCH_LAB_BUILD_DEV_CYCLE "v7.0.0" /**< @brief Development: Release name for current development cycle */
+#define SCH_LAB_BUILD_BASELINE  "v7.0.1" /*!< Development Build: git tag that is the base for current development */
+#define SCH_LAB_BUILD_DEV_CYCLE "v7.0.1" /**< @brief Development: Release name for current development cycle */
 #define SCH_LAB_BUILD_CODENAME  "Draco"  /**< @brief: Development: Code name for the current build */
 
 /*
@@ -35,12 +35,12 @@
  */
 #define SCH_LAB_MAJOR_VERSION 7 /*!< @brief Major version number */
 #define SCH_LAB_MINOR_VERSION 0 /*!< @brief Minor version number */
-#define SCH_LAB_REVISION      0 /*!< @brief Revision version number. Value of 0 indicates a development version.*/
+#define SCH_LAB_REVISION      1 /*!< @brief Revision version number. Value of 0 indicates a development version.*/
 
 /**
  * @brief Last official release.
  */
-#define SCH_LAB_LAST_OFFICIAL "v7.0.0"
+#define SCH_LAB_LAST_OFFICIAL "v7.0.1"
 
 /*!
  * @brief Mission revision.
